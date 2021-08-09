@@ -20,4 +20,9 @@ models:
   jaffle_shop:
       materialized: table
       staging:
-        materialized: view
+        materialized: table
+seeds:
+  jaffle_shop:
+    raw_orders:
+      +column_types:
+        order_date: text
