@@ -3,4 +3,4 @@
     materialized = 'table',
     )
 }}
-SELECT 1 as hail_mary
+SELECT 1 AS hail_mary
