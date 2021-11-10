@@ -22,10 +22,14 @@ dispatch:
 
 models:
   jaffle_shop:
+      +pre-hook: "set firebolt_dont_wait_for_upload_to_s3=1" # WARNING: alpha feature
       materialized: table
       staging:
         materialized: table
 
+models:
+  jaffle_shop:
+    
 seeds:
   jaffle_shop:
     +pre-hook: "set firebolt_dont_wait_for_upload_to_s3=1" # WARNING: alpha feature
