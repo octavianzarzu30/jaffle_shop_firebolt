@@ -22,10 +22,25 @@ dispatch:
 
 models:
   jaffle_shop:
-      materialized: table
-      staging:
-        materialized: table
-
+      orders:
+        +materialized: table
+        +table_type: dimension
+        +indexes: |
+          {
+          'type': 'aggregating',
+          'key_column': 'order_id',
+          'aggregation': ['COUNT(DISTINCT status)', 'AVG(customer_id)']
+          },
+          {
+            'type': 'aggregating',
+            'key_column': 'customer_id',
+            'aggregation': 'COUNT(DISTINCT status)'
+          },
+          {
+            'type': 'join',
+            'join_column': 'order_id',
+            'dimension_column': ['customer_id', 'status']
+          }
 seeds:
   +quote_columns: true
   jaffle_shop:

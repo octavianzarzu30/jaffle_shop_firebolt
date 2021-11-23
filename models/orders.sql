@@ -1,3 +1,19 @@
+{{
+  config(
+    materialized = 'table',
+    table_type = 'dimension',
+    primary_index = 'order_id',
+    indexes = [
+      {
+        'type': 'join',
+        'join_column': 'order_id',
+        'dimension_column': ['customer_id', 'status']
+      }
+    ]
+    )
+}}
+
+
 {% set payment_methods = ['credit_card', 'coupon', 'bank_transfer', 'gift_card'] %}
 
 with orders as (

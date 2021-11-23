@@ -1,3 +1,18 @@
+{{
+  config(
+    materialized = 'table',
+    table_type = 'fact',
+    primary_index = ['customer_id'],
+    indexes = [
+      {
+        'type': 'aggregating',
+        'key_column': 'customer_id',
+        'aggregation': ['COUNT(DISTINCT most_recent_order)', 'SUM(customer_lifetime_value)']
+      }
+    ]
+    )
+}}
+
 with customers as (
     select * from {{ ref('stg_customers') }}
 ),
